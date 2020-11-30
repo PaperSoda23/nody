@@ -1,4 +1,6 @@
+import { ValidationErrorMsg } from './ValidationError';
+
 export interface ValidationResponse {
     isValid: boolean;
-    validationMessage?: string;
+    validationErrorMsg?: ValidationErrorMsg;
 }

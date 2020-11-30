@@ -1,23 +1,34 @@
-import { FieldValidator } from "./FieldValidator.interface";
+import { ValidationResponse } from './ValidationResponse.interface';
+import { ValidationErrorMsg } from './ValidationError';
+import { FieldValidator, InitialValidator } from "./FieldValidator.interface";
 
 /**
  * @description
  * cheks if string is not empty
  * @param fieldValue raw field input string
  */
-const isNotEmpty: FieldValidator = (fieldValue: string):boolean => !!fieldValue.trim();
+const isNotEmpty: InitialValidator = (validationErrorMsg: ValidationErrorMsg) => (fieldValue: string): ValidationResponse => ({
+    isValid: !!fieldValue.trim(),
+    validationErrorMsg
+});
 /**
  * @description
  * checks if string can be converted to positive number
  * @param fieldValue raw field input string
  */
-const isPositive: FieldValidator = (fieldValue: string):boolean => +fieldValue > 0;
+const isPositive: InitialValidator = (validationErrorMsg: ValidationErrorMsg) => (fieldValue: string): ValidationResponse => ({
+    isValid: +fieldValue > 0,
+    validationErrorMsg
+});
 /**
  * @description
  * checks if string is a valid integer
  * @param fieldValue raw field input string
  */
-const isInt: FieldValidator = (fieldValue: string): boolean => /^[0-9]\d*$/.test(fieldValue);
+const isInt: InitialValidator = (validationErrorMsg: ValidationErrorMsg) => (fieldValue: string): ValidationResponse => ({
+    isValid: /^[0-9]\d*$/.test(fieldValue),
+    validationErrorMsg
+ });
 /**
  * @description
  * checks if date is a valid date
@@ -26,7 +37,10 @@ const isInt: FieldValidator = (fieldValue: string): boolean => /^[0-9]\d*$/.test
  * valid = !isNaN(t.valueOf());
  * @param fieldValue raw field input string
  */
-const isDate: FieldValidator = (fieldValue: string): boolean => !isNaN(Date.parse(fieldValue))
+const isDate: InitialValidator = (validationErrorMsg: ValidationErrorMsg) => (fieldValue: string): ValidationResponse => ({
+   isValid: !isNaN(Date.parse(fieldValue)),
+   validationErrorMsg
+});
 
 export {
     isNotEmpty,
