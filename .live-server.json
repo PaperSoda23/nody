@@ -1,0 +1,7 @@
+{
+    "root": "/public/index.html",
+    "port": 5000,
+    "host": "0.0.0.0",
+    "open": true,
+    "file": "index.htm"
+}
