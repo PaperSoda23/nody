@@ -1,5 +1,7 @@
-class HttpService {
-    public async get(api: string) {
+export class HttpService<Req, Resp> {
+    constructor() {}
+
+    public async get(api: string): Promise<Resp[]> {
         try {
             const response = await fetch(api);
             const json = response.json();
@@ -9,12 +11,20 @@ class HttpService {
         }
     }
 
-    public post() {
-
+    public async post(api: string, data: Req): Promise<number> {
+        try {
+            const response: Response = await fetch(api, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            });            
+            return response.status;
+        } catch(e) {
+            console.error(e);
+        }
     }
 }
 
-interface Response {
-
-}
 
