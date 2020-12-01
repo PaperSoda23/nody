@@ -1,6 +1,4 @@
-import { ValidationResponse } from './ValidationResponse.interface';
-import { ValidationErrorMsg } from './ValidationError';
-import { FieldValidator, InitialValidator } from "./FieldValidator.interface";
+import { InitialValidator, ValidationErrorMsg, ValidationResponse } from "./Validation.types";
 
 /**
  * @description

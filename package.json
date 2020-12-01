@@ -2,6 +2,7 @@
   "name": "nody",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"tsc -w\" \"sass --watch styles:public/css\" \"live-server\"",

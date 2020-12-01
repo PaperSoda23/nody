@@ -16,18 +16,20 @@
 
             <div class="input-form__field">
                 <label for="birthdate">birth date</label>
-                <input type="date" id="birthdate"/>
+                <input type="date" id="date-input"/>
             </div>
 
             <div class="input-form__field">
                 <label for="siblings">siblings</label>
-                <input type="number" placeholder="how many siblings?" id="siblings"/>
+                <input type="number" placeholder="how many siblings?" id="sibling-input"/>
             </div>
 
             <button type="submit">Submit</button>
         </form>
-        
-        <h1 class="greet-message">greet message</h1>
+
+        <h1 class="result-message">Great!</h1>
+        <h1 class="greet-message">Hello!</h1>
+
     </div>
 
     <script 
@@ -36,7 +38,7 @@
         crossorigin="anonymous"
     ></script>
 
-    <script src="../dist/index.js"></script>
+    <script type="module" src="js/index.js"></script>
 
     <style>
         .input-form {
