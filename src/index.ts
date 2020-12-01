@@ -95,4 +95,3 @@ const handleFormSubmit = (validators: Map<string, FieldValidator[]>) => {
         submitForm(statusCode);
     });
 }
-
