@@ -1,11 +1,11 @@
-import { InitialValidator, ValidationErrorMsg, ValidationResponse } from "./Validation.types";
+import { FieldValidator, InitialValidator, ValidationErrorMsg, ValidationResponse } from "./Validation.types";
 
 /**
  * @description
  * cheks if string is not empty
  * @param fieldValue raw field input string
  */
-const isNotEmpty: InitialValidator = (validationErrorMsg: ValidationErrorMsg) => (fieldValue: string): ValidationResponse => ({
+const isNotEmpty: InitialValidator = (validationErrorMsg: ValidationErrorMsg): FieldValidator => (fieldValue: string): ValidationResponse => ({
     isValid: !!fieldValue.trim(),
     validationErrorMsg
 });
@@ -14,7 +14,7 @@ const isNotEmpty: InitialValidator = (validationErrorMsg: ValidationErrorMsg) =>
  * checks if string can be converted to positive number
  * @param fieldValue raw field input string
  */
-const isPositive: InitialValidator = (validationErrorMsg: ValidationErrorMsg) => (fieldValue: string): ValidationResponse => ({
+const isPositive: InitialValidator = (validationErrorMsg: ValidationErrorMsg): FieldValidator => (fieldValue: string): ValidationResponse => ({
     isValid: +fieldValue > 0,
     validationErrorMsg
 });
@@ -23,7 +23,7 @@ const isPositive: InitialValidator = (validationErrorMsg: ValidationErrorMsg) =>
  * checks if string is a valid integer
  * @param fieldValue raw field input string
  */
-const isInt: InitialValidator = (validationErrorMsg: ValidationErrorMsg) => (fieldValue: string): ValidationResponse => ({
+const isInt: InitialValidator = (validationErrorMsg: ValidationErrorMsg): FieldValidator => (fieldValue: string): ValidationResponse => ({
     isValid: /^[0-9]\d*$/.test(fieldValue),
     validationErrorMsg
  });
@@ -35,7 +35,7 @@ const isInt: InitialValidator = (validationErrorMsg: ValidationErrorMsg) => (fie
  * valid = !isNaN(t.valueOf());
  * @param fieldValue raw field input string
  */
-const isDate: InitialValidator = (validationErrorMsg: ValidationErrorMsg) => (fieldValue: string): ValidationResponse => ({
+const isDate: InitialValidator = (validationErrorMsg: ValidationErrorMsg): FieldValidator => (fieldValue: string): ValidationResponse => ({
    isValid: !isNaN(Date.parse(fieldValue)),
    validationErrorMsg
 });
