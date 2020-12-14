@@ -11,7 +11,7 @@
         <form class="input-form" name="input-form">
             <div class="input-form__field">
                 <label for="name-input">name</label>
-                <input type="text" id="name-input" name="name-input" placeholder="what's your name?"/>
+                <input type="text" autocomplete="off" id="name-input" name="name-input" placeholder="what's your name?"/>
             </div>
 
             <div class="input-form__field">
@@ -21,7 +21,7 @@
 
             <div class="input-form__field">
                 <label for="siblings">siblings</label>
-                <input type="number" placeholder="how many siblings?" id="sibling-input"/>
+                <input type="number" step=".01" placeholder="how many siblings?" id="sibling-input"/>
             </div>
 
             <button type="submit">Submit</button>

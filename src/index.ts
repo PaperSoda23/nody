@@ -1,7 +1,7 @@
 import { Post } from './http/Post.interface.js';
 import { Person } from './http/Person.interface.js';
 import { HttpService } from './http/Http.service.js';
-import { ERROR_VALIDATION_EMPTY_FIELD, ERROR_VALIDATION_NOT_DATE_FIELD, ERROR_VALIDATION_NOT_POSITIVE_FIELD } from './validation/Errors.const.js';
+import { ERROR_VALIDATION_EMPTY_FIELD, ERROR_VALIDATION_NOT_DATE_FIELD, ERROR_VALIDATION_NOT_POSITIVE_FIELD, ERROR_VALIDATION__NOT_INT_FIELD } from './validation/Errors.const.js';
 import { isDate, isInt, isNotEmpty, isPositive } from './validation/InputFieldValidators.js';
 import { FieldValidator, ValidationErrorMsg, ValidationResponse } from "./validation/Validation.types.js";
 
@@ -37,7 +37,7 @@ const setupListeners = () => {
 const setupFieldValidators = () => {
     const validators = new Map<string, FieldValidator[]>();
     validators.set(nameInput, [isNotEmpty(ERROR_VALIDATION_EMPTY_FIELD)]);
-    validators.set(siblingInput, [isPositive(ERROR_VALIDATION_NOT_POSITIVE_FIELD), isInt(ERROR_VALIDATION_NOT_DATE_FIELD)]);
+    validators.set(siblingInput, [isPositive(ERROR_VALIDATION_NOT_POSITIVE_FIELD), isInt(ERROR_VALIDATION__NOT_INT_FIELD)]);
     validators.set(dateInput, [isDate(ERROR_VALIDATION_NOT_DATE_FIELD)]);
     return validators;
 }
@@ -57,6 +57,7 @@ const deleteResultMessageOnSiblingsEnter = () => $(siblingInput).on('mouseenter'
 const changeGreetColorOnButtonEnter = () => $('button').on('mouseenter', () => $(greetMessage).css('color', 'green'));
 const appendMessageWhenLeaveNameInput = () => $(nameInput).on('mouseleave', () => $(greetMessage).append(getTextContent(nameInput)));
 const getTextContent = (selector: string) => $(selector).val() as string;
+const clearErrors = () => $('.error').remove();
 
 const validateField = (value: string, validators: FieldValidator[]): ValidationErrorMsg[] => {
     const validationErrorMessages = validators
@@ -74,7 +75,8 @@ const validateForm = (validators: Map<string, FieldValidator[]>) => {
     const errorList: boolean[] = [...validators.keys()].map(inputSelector => {
         const fieldInputValue = $(inputSelector).val().toString();
         const validationMessages: ValidationErrorMsg[] = validateField(fieldInputValue, validators.get(inputSelector))
-        if (hasFormErrors(validationMessages)) addValidationErrors(inputSelector, validationMessages);
+        if (hasFormErrors(validationMessages)) 
+            addValidationErrors(inputSelector, validationMessages);
         return hasFormErrors(validationMessages)
     })
     alert(`errors = ${errorList}`)
@@ -88,9 +90,11 @@ const addValidationErrors = (selector: string, errors: ValidationErrorMsg[]): vo
 const handleFormSubmit = (validators: Map<string, FieldValidator[]>) => {
     $(document).on("submit", "form", async (event) => {
         event.preventDefault();
+        clearErrors();
         const formHasErrors = validateForm(validators);
         clearForm([...validators.keys()])
-        if (formHasErrors) return;
+        if (formHasErrors) 
+            return;
         const statusCode = await postToPosts();
         submitForm(statusCode);
     });

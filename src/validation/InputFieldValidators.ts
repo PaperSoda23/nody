@@ -24,7 +24,7 @@ const isPositive: InitialValidator = (validationErrorMsg: ValidationErrorMsg): F
  * @param fieldValue raw field input string
  */
 const isInt: InitialValidator = (validationErrorMsg: ValidationErrorMsg): FieldValidator => (fieldValue: string): ValidationResponse => ({
-    isValid: /^[0-9]\d*$/.test(fieldValue),
+    isValid: /^-?[0-9]\d*$/.test(fieldValue),
     validationErrorMsg
  });
 /**
